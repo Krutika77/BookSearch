@@ -1,32 +1,29 @@
 import React, { useState, useEffect } from "react";
-import errorImage from "./400.png";
-import axios from "axios";
-import { Buffer } from "buffer";
 
 const COVER_URL = "https://covers.openlibrary.org/b/isbn/";
 
 const BookCard = ({ book }) => {
   const [isbn, setIsbn] = useState([]);
-  const [cover, setCover] = useState("");
-  //console.log(isbn);
+  // const [cover, setCover] = useState("");
+  // //console.log(isbn);
 
   useEffect(() => {
     setIsbn(book.isbn);
-  }, []);
+  }, [book.isbn]);
 
-  const fetchCover = () => {
-    if (isbn) {
-      return axios
-        .get(`${COVER_URL}${isbn[isbn.length - 1]}-M.jpg`, {
-          responseType: "arraybuffer",
-        })
-        .then((response) =>
-          Buffer.from(response.data, "binary").toString("base64")
-        );
-    } else {
-      return errorImage;
-    }
-  };
+  // const fetchCover = () => {
+  //   if (isbn) {
+  //     return axios
+  //       .get(`${COVER_URL}${isbn[isbn.length - 1]}-M.jpg`, {
+  //         responseType: "arraybuffer",
+  //       })
+  //       .then((response) =>
+  //         Buffer.from(response.data, "binary").toString("base64")
+  //       );
+  //   } else {
+  //     return errorImage;
+  //   }
+  // };
 
   //   useEffect(() => {
   //     if (isbn) {
@@ -42,10 +39,10 @@ const BookCard = ({ book }) => {
   //     }
   //   }, [isbn]);
 
-  setTimeout(() => {
-    console.log(fetchCover());
-  }, 5000);
-  //   console.log(cover);
+  // setTimeout(() => {
+  //   console.log(fetchCover());
+  // }, 5000);
+  // //   console.log(cover);
 
   return (
     <div className="book">
@@ -53,7 +50,10 @@ const BookCard = ({ book }) => {
         <p>{book.first_publish_year}</p>
       </div>
       <div>
-        <img src={fetchCover()} alt={book.title} />
+        <img
+          src={isbn ? `${COVER_URL}${isbn[isbn.length - 1]}-M.jpg` : "400.png"}
+          alt={book.title}
+        />
       </div>
 
       <div>
