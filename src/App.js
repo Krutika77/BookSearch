@@ -14,9 +14,8 @@ const App = () => {
     const data = await response.json();
 
     const newData = data.docs.slice(0, 40);
-    // console.log(newData);
     setBooks(newData);
-    this.setState({});
+    setQuery("");
   };
   useEffect(() => {
     searchBooks("Harry Potter");
@@ -33,6 +32,11 @@ const App = () => {
             placeholder="Search for a book"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                searchBooks(query);
+              }
+            }}
           />
           <img
             src={SearchIcon}
