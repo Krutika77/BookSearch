@@ -16,6 +16,7 @@ const App = () => {
     const newData = data.docs.slice(0, 40);
     // console.log(newData);
     setBooks(newData);
+    this.setState({});
   };
   useEffect(() => {
     searchBooks("Harry Potter");

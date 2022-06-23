@@ -37,7 +37,6 @@ function Paginate({ books }) {
           <h2>No relevant books found.</h2>
         </div>
       )}
-
       <ReactPaginate
         nextLabel=">"
         onPageChange={handlePageClick}
